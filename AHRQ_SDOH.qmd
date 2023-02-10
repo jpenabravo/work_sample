@@ -9,7 +9,7 @@ editor: visual
 ```{r message=FALSE}
 
 library(tidyverse)
-library(readxl)
+library(openxlsx)
 library(janitor)
 library(scales)
 ```
@@ -34,10 +34,10 @@ duval_zipcodes <-  duval_zipcodes[-c(33:34)]
 
 # load sdoh files for 2018 - 2020
 
-sdoh <- map_df(.x = c("SDOH_2018_ZIPCODE_1_0.xlsx",
-                      "SDOH_2019_ZIPCODE_1_0.xlsx",
-                      "SDOH_2020_ZIPCODE_1_0.xlsx"),
-               .f = ~read_xlsx(paste0("data/", .x), sheet = 2))
+sdoh <- map_df(.x = c("https://www.ahrq.gov/sites/default/files/wysiwyg/sdoh/SDOH_2018_ZIPCODE_1_0.xlsx",
+                      "https://www.ahrq.gov/sites/default/files/wysiwyg/sdoh/SDOH_2019_ZIPCODE_1_0.xlsx",
+                      "https://www.ahrq.gov/sites/default/files/wysiwyg/sdoh/SDOH_2020_ZIPCODE_1_0.xlsx"),
+               .f = ~read.xlsx(.x, sheet = 2))
 ```
 
 Data obtained from:
@@ -59,7 +59,7 @@ sdoh_cln <-
 
 # Look at the first 6 rows
 
-head(sdoh_cln)
+# head(sdoh_cln)
 
 # Percentage of the population by zip code that speaks: English, Spanish or Asian and Pacific Island languages
 
